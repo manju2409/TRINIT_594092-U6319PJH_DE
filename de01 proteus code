@@ -2,34 +2,34 @@
 
 
 
-// Function Purpose: Set initial values of SCK and SDA pins
+//Set initial values of SCK and SDA pins
 void InitI2C(void)
 {	
-	// Make SDA and SCK pins input initially
+	// initialise SDA and SCK
 	SDA_DIR = 1;
 	SCK_DIR = 1;
 	
-	// Write zero in output register of SDA and SCK pin
+	// output pins as SDA and SCK
 	SDA = 0;
 	SCK = 0;
 }
 
 
-// Function Purpose: I2C_Start sends start bit sequence
+// I2C_Start sends start bit sequence
 void I2C_Start(void)
 {
-	SDA = 0;	// Write zero in output register 
-	SCK = 0;	// of SDA and SCK pin
+	SDA = 0;	// Write zero in output register of SDA and SCK pin
+	SCK = 0;                                        
 
-	Set_SCK_High;				// Make SCK pin high
-	Set_SDA_High;				// Make SDA pin High
+	Set_SCK_High;				// To Make SCK pin high
+	Set_SDA_High;				//To  Make SDA pin High
 	__delay_us(HalfBitDelay);	// Half bit delay
-	Set_SDA_Low;				// Make SDA Low
-	__delay_us(HalfBitDelay);	// Half bit delay
+	Set_SDA_Low;				// To Make SDA Low
+	__delay_us(HalfBitDelay);	
 }
 
 
-// Function Purpose: I2C_ReStart sends start bit sequence
+// I2C_ReStart sends start bit sequence
 void I2C_ReStart(void)
 {
 	Set_SCK_Low;				// Make SCK pin low
@@ -46,7 +46,7 @@ void I2C_ReStart(void)
 }
 
 
-//Function : I2C_Stop sends stop bit sequence
+// I2C_Stop sends stop bit sequence
 void I2C_Stop(void)
 {
 	Set_SCK_Low;				// Make SCK pin low
@@ -64,7 +64,7 @@ void I2C_Stop(void)
 
 
 
-//Function : I2C_Send_ACK sends ACK bit sequence
+//I2C_Send_ACK sends ACK bit sequence
 void I2C_Send_ACK(void)
 {
 	Set_SCK_Low;				// Make SCK pin low
@@ -77,7 +77,7 @@ void I2C_Send_ACK(void)
 }
 
 
-//Function : I2C_Send_NACK sends NACK bit sequence
+//I2C_Send_NACK sends NACK bit sequence
 void I2C_Send_NACK(void)
 {
 	Set_SCK_Low;				// Make SCK pin low
@@ -90,7 +90,7 @@ void I2C_Send_NACK(void)
 }
 
 
-// Function Purpose: I2C_Write_Byte transfers one byte
+// I2C_Write_Byte transfers one byte
 bit I2C_Write_Byte(unsigned char Byte)
 {
 	unsigned char i;		// Variable to be used in for loop
@@ -123,7 +123,7 @@ bit I2C_Write_Byte(unsigned char Byte)
 }
 
 
-// Function Purpose: I2C_Read_Byte reads one byte
+// I2C_Read_Byte reads one byte
 unsigned char I2C_Read_Byte(void)
 {
 	unsigned char i, RxData = 0;
