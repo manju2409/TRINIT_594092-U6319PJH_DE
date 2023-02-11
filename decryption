@@ -1,0 +1,48 @@
+#include <stdlib.h>
+
+void setup() {
+  Serial.begin(9600); // initialize serial communication with a baud rate of 9600
+  while (!Serial) {
+    ; // wait for serial port to connect
+  }
+  Serial.println("");
+}
+
+void loop() {
+  long enc[6];
+  long dec[6];
+  String inp;
+  for (int i = 0; i < 6; i++) {
+    while (Serial.available() == 0) {}
+    inp = Serial.readString();
+    enc[i] = atoi(inp.c_str());
+  }
+  
+  Serial.println("Numbers entered: ");
+  for (int i = 0; i < 6; i++) {
+    Serial.println(enc[i]);
+  }
+
+  long flag = 0;
+  long temp = 1;
+  for (int i = 0; i < 6; i++) {
+    while(flag != 11 ) {
+      temp = temp*enc[i];
+      flag++;
+      temp=temp%120;
+    }
+    dec[i]=temp%120;
+    temp = 1;
+    flag = 0;
+  }
+
+  Serial.println("Decryption output: ");
+  for (int i = 0; i < 6; i++) {
+    Serial.println(dec[i]);
+  }
+
+  Serial.println("Exiting...");
+  while (1) {
+    ; // do nothing and wait for reset
+  }
+}
